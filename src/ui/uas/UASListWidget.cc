@@ -112,7 +112,16 @@ void UASListWidget::addUAS(UASInterface* uas)
     if (!uasViews.contains(uas))
     {
         uasViews.insert(uas, new UASView(uas, this));
-        listLayout->addWidget(uasViews.value(uas));
+
+	// always display gcs at top of uas list
+	if (uas->getUASID() == 255)
+	{
+	    listLayout->insertWidget(0, uasViews.value(uas));
+	}
+	else
+	{
+	    listLayout->addWidget(uasViews.value(uas));
+	}
         //connect(uas, SIGNAL(destroyed(QObject*)), this, SLOT(removeUAS(QObject*)));
     }
 }
