@@ -101,16 +101,16 @@ void QGCMapTool::globalPositionUpdate()
 void QGCMapTool::gpsHdopChanged(double value, const QString &)
 {
     QString stringHdop = QString::number(value,'g',2);
-    ui->hdopLabel->setText(tr("HDOP: %1").arg(stringHdop));
+//    ui->hdopLabel->setText(tr("HDOP: %1").arg(stringHdop));
 }
 
 void QGCMapTool::gpsFixChanged(int, const QString &)
 {
     UAS* uas = dynamic_cast<UAS*>(m_uasInterface);
-    ui->fixLabel->setText(tr("FIX: %1").arg(uas->getGpsFixString()));
+//    ui->fixLabel->setText(tr("FIX: %1").arg(uas->getGpsFixString()));
 }
 
 void QGCMapTool::satelliteCountChanged(int value, const QString &)
 {
-    ui->satsLabel->setText(tr("SATS: %1").arg(value));
+//    ui->satsLabel->setText(tr("SATS: %1").arg(value));
 }

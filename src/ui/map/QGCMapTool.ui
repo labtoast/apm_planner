@@ -76,7 +76,7 @@
        <string>LAT:</string>
       </property>
      </widget>
-     <widget class="QLabel" name="satsLabel">
+     <!-- widget class="QLabel" name="satsLabel">
       <property name="geometry">
        <rect>
         <x>390</x>
@@ -96,8 +96,8 @@
       <property name="text">
        <string>SATS:</string>
       </property>
-     </widget>
-     <widget class="QLabel" name="hdopLabel">
+     </widget -->
+     <!-- widget class="QLabel" name="hdopLabel">
       <property name="geometry">
        <rect>
         <x>460</x>
@@ -117,8 +117,8 @@
       <property name="text">
        <string>HDOP:</string>
       </property>
-     </widget>
-     <widget class="QLabel" name="fixLabel">
+     </widget -->
+     <!-- widget class="QLabel" name="fixLabel">
       <property name="geometry">
        <rect>
         <x>330</x>
@@ -138,11 +138,11 @@
       <property name="text">
        <string>FIX:</string>
       </property>
-     </widget>
+     </widget -->
      <widget class="QLabel" name="zoomLabel">
       <property name="geometry">
        <rect>
-        <x>540</x>
+        <x>330</x>
         <y>10</y>
         <width>71</width>
         <height>21</height>
