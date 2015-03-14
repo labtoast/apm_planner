@@ -79,8 +79,8 @@ WaypointList::WaypointList(QWidget *parent, UASWaypointManager* wpm) :
     // DELETE ALL WAYPOINTS
     connect(m_ui->clearWPListButton, SIGNAL(clicked()), this, SLOT(clearWPWidget()));
 
-    // REQUEST WAYPOINTS
-    connect(m_ui->readButton, SIGNAL(clicked()), this, SLOT(read()));
+//    // REQUEST WAYPOINTS
+//    connect(m_ui->readButton, SIGNAL(clicked()), this, SLOT(read()));
 
     // SAVE/LOAD WAYPOINTS
     connect(m_ui->saveButton, SIGNAL(clicked()), this, SLOT(saveWaypoints()));
@@ -88,17 +88,17 @@ WaypointList::WaypointList(QWidget *parent, UASWaypointManager* wpm) :
 
     //connect(UASManager::instance(), SIGNAL(activeUASSet(UASInterface*)), this, SLOT(setUAS(UASInterface*)));
 
-    //VIEW TAB
-
-    viewOnlyListLayout = new QVBoxLayout(m_ui->viewOnlyListWidget);
-    viewOnlyListLayout->setSpacing(0);
-    viewOnlyListLayout->setMargin(0);
-    viewOnlyListLayout->setAlignment(Qt::AlignTop);
-    m_ui->viewOnlyListWidget->setLayout(viewOnlyListLayout);
-
-    // REFRESH VIEW TAB
-
-    connect(m_ui->refreshButton, SIGNAL(clicked()), this, SLOT(refresh()));
+//    //VIEW TAB
+//
+//    viewOnlyListLayout = new QVBoxLayout(m_ui->viewOnlyListWidget);
+//    viewOnlyListLayout->setSpacing(0);
+//    viewOnlyListLayout->setMargin(0);
+//    viewOnlyListLayout->setAlignment(Qt::AlignTop);
+//    m_ui->viewOnlyListWidget->setLayout(viewOnlyListLayout);
+//
+//    // REFRESH VIEW TAB
+//
+//    connect(m_ui->refreshButton, SIGNAL(clicked()), this, SLOT(refresh()));
 
     if (WPM) {
         // SET UAS AFTER ALL SIGNALS/SLOTS ARE CONNECTED
@@ -107,11 +107,11 @@ WaypointList::WaypointList(QWidget *parent, UASWaypointManager* wpm) :
             // Hide buttons, which don't make sense without valid UAS
             m_ui->positionAddButton->setEnabled(false);
             m_ui->transmitButton->setEnabled(false);
-            m_ui->readButton->setEnabled(false);
-            m_ui->refreshButton->setEnabled(false);
-            //FIXME: The whole "Onboard Waypoints"-tab should be hidden, instead of "refresh" button
-            UnconnectedUASInfoWidget* inf = new UnconnectedUASInfoWidget(this);
-            viewOnlyListLayout->insertWidget(0, inf); //insert a "NO UAV" info into the Onboard Tab
+//            m_ui->readButton->setEnabled(false);
+//            m_ui->refreshButton->setEnabled(false);
+//            //FIXME: The whole "Onboard Waypoints"-tab should be hidden, instead of "refresh" button
+//            UnconnectedUASInfoWidget* inf = new UnconnectedUASInfoWidget(this);
+//            viewOnlyListLayout->insertWidget(0, inf); //insert a "NO UAV" info into the Onboard Tab
             showOfflineWarning = true;
         } else {
             setUAS(static_cast<UASInterface*>(WPM->getUAS()));
@@ -425,7 +425,7 @@ void WaypointList::updateStatusLabel(const QString &string)
     // Status label in write widget
     m_ui->statusLabel->setText(string);
     // Status label in read only widget
-    m_ui->viewStatusLabel->setText(string);
+//    m_ui->viewStatusLabel->setText(string);
 }
 
 // Request UASWaypointManager to send the SET_CURRENT message to UAV

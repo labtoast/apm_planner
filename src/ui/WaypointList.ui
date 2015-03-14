@@ -158,7 +158,7 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="1">
+       <!-- item row="1" column="1">
         <widget class="QPushButton" name="readButton">
          <property name="minimumSize">
           <size>
@@ -183,7 +183,7 @@
            <normaloff>:/files/images/status/software-update-available.svg</normaloff>:/files/images/status/software-update-available.svg</iconset>
          </property>
         </widget>
-       </item>
+       </item -->
        <item row="1" column="8">
         <widget class="QToolButton" name="addButton">
          <property name="toolTip">
@@ -266,7 +266,7 @@
          </property>
         </spacer>
        </item>
-       <item row="1" column="2">
+       <item row="1" column="1">
         <widget class="QPushButton" name="transmitButton">
          <property name="minimumSize">
           <size>
@@ -310,7 +310,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="viewTab">
+     <!-- widget class="QWidget" name="viewTab">
       <attribute name="title">
        <string>Onboard Waypoints</string>
       </attribute>
@@ -403,7 +403,7 @@
         </widget>
        </item>
       </layout>
-     </widget>
+     </widget -->
     </widget>
    </item>
   </layout>
