@@ -59,7 +59,7 @@
      </property>
     </widget>
    </item>
-   <item>
+   <!-- item>
     <widget class="QPushButton" name="lastPosButton">
      <property name="maximumSize">
       <size>
@@ -71,7 +71,7 @@
       <string>Last Pos</string>
      </property>
     </widget>
-   </item>
+   </item -->
    <item>
     <widget class="QPushButton" name="ripMapButton">
      <property name="maximumSize">
