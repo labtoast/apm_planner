@@ -361,7 +361,7 @@ MainWindow::MainWindow(QWidget *parent):
     // Trigger Droneshare Notificaton
     QSettings settings;
     settings.beginGroup("QGC_MAINWINDOW");
-    if(settings.value("DRONESHARE_NOTIFICATION_ENABLED",true).toBool()){
+    if(settings.value("DRONESHARE_NOTIFICATION_ENABLED",false).toBool()){
         QTimer::singleShot(11000, this, SLOT(showDroneshareDialog()));
     }
     settings.endGroup();
