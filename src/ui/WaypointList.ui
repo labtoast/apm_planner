@@ -284,7 +284,7 @@
           <string>Transmit all waypoints on this list to the MAV.</string>
          </property>
          <property name="text">
-          <string>Set</string>
+          <string>Send Mission to Central Coordinator</string>
          </property>
          <property name="icon">
           <iconset resource="../../qgroundcontrol.qrc">
