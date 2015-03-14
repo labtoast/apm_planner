@@ -350,13 +350,13 @@ MainWindow::MainWindow(QWidget *parent):
     }
 #endif
 
-    // Trigger Auto Update Check
-    m_autoUpdateCheck.suppressNoUpdateSignal();
-    QTimer::singleShot(5000, &m_autoUpdateCheck, SLOT(autoUpdateCheck()));
-    connect(&m_autoUpdateCheck, SIGNAL(updateAvailable(QString,QString,QString,QString)),
-            this, SLOT(showAutoUpdateDownloadDialog(QString,QString,QString,QString)));
-    connect(&m_autoUpdateCheck, SIGNAL(noUpdateAvailable()),
-            this, SLOT(showNoUpdateAvailDialog()));
+//    // Trigger Auto Update Check
+//    m_autoUpdateCheck.suppressNoUpdateSignal();
+//    QTimer::singleShot(5000, &m_autoUpdateCheck, SLOT(autoUpdateCheck()));
+//    connect(&m_autoUpdateCheck, SIGNAL(updateAvailable(QString,QString,QString,QString)),
+//            this, SLOT(showAutoUpdateDownloadDialog(QString,QString,QString,QString)));
+//    connect(&m_autoUpdateCheck, SIGNAL(noUpdateAvailable()),
+//            this, SLOT(showNoUpdateAvailDialog()));
 
     // Trigger Droneshare Notificaton
     QSettings settings;
