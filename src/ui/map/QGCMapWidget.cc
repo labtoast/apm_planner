@@ -344,6 +344,13 @@ void QGCMapWidget::storeSettings()
 
 void QGCMapWidget::mouseDoubleClickEvent(QMouseEvent* event)
 {
+  // if there are no waypoints yet create home waypoint 0 AND waypoint 1
+  int waypointCopies = 1;
+  if (currWPManager->getWaypointEditableList().count() == 0) {
+    waypointCopies = 2;
+  }
+
+  for (int i = 0; i < waypointCopies; i++) {
     // If a waypoint manager is available
     if (currWPManager)
     {
@@ -359,6 +366,7 @@ void QGCMapWidget::mouseDoubleClickEvent(QMouseEvent* event)
     }
 
     OPMapWidget::mouseDoubleClickEvent(event);
+  }
 }
 
 
