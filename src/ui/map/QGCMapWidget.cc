@@ -827,43 +827,43 @@ void QGCMapWidget::redrawWaypointLines()
 
 void QGCMapWidget::redrawWaypointLines(int uas)
 {
-//    QLOG_DEBUG() << "REDRAW WAYPOINT LINES FOR UAS" << uas;
-
-    if (!currWPManager)
-        return;
-
-    QGraphicsItemGroup* group = waypointLine(uas);
-    if (!group)
-        return;
-    Q_ASSERT(group->parentItem() == map);
-
-    // Delete existing waypoint lines
-    foreach (QGraphicsItem* item, group->childItems())
-    {
-        QLOG_TRACE() << "DELETE EXISTING WAYPOINT LINES" << item;
-        delete item;
-    }
-
-    QList<Waypoint*> wps = currWPManager->getGlobalFrameAndNavTypeWaypointList(true);
-    if (wps.size() > 1)
-    {
-        QPainterPath path = WaypointNavigation::path(wps, *map);
-        if (path.elementCount() > 1)
-        {
-            QGraphicsPathItem* gpi = new QGraphicsPathItem(map);
-            gpi->setPath(path);
-
-            QColor color(Qt::red);
-            UASInterface* uasInstance = UASManager::instance()->getUASForId(uas);
-            if (uasInstance) color = uasInstance->getColor();
-            QPen pen(color);
-            pen.setWidth(2);
-            gpi->setPen(pen);
-
-            QLOG_TRACE() << "ADDING WAYPOINT LINES" << gpi;
-            group->addToGroup(gpi);
-        }
-    }
+////    QLOG_DEBUG() << "REDRAW WAYPOINT LINES FOR UAS" << uas;
+//
+//    if (!currWPManager)
+//        return;
+//
+//    QGraphicsItemGroup* group = waypointLine(uas);
+//    if (!group)
+//        return;
+//    Q_ASSERT(group->parentItem() == map);
+//
+//    // Delete existing waypoint lines
+//    foreach (QGraphicsItem* item, group->childItems())
+//    {
+//        QLOG_TRACE() << "DELETE EXISTING WAYPOINT LINES" << item;
+//        delete item;
+//    }
+//
+//    QList<Waypoint*> wps = currWPManager->getGlobalFrameAndNavTypeWaypointList(true);
+//    if (wps.size() > 1)
+//    {
+//        QPainterPath path = WaypointNavigation::path(wps, *map);
+//        if (path.elementCount() > 1)
+//        {
+//            QGraphicsPathItem* gpi = new QGraphicsPathItem(map);
+//            gpi->setPath(path);
+//
+//            QColor color(Qt::red);
+//            UASInterface* uasInstance = UASManager::instance()->getUASForId(uas);
+//            if (uasInstance) color = uasInstance->getColor();
+//            QPen pen(color);
+//            pen.setWidth(2);
+//            gpi->setPen(pen);
+//
+//            QLOG_TRACE() << "ADDING WAYPOINT LINES" << gpi;
+//            group->addToGroup(gpi);
+//        }
+//    }
 }
 
 /**
