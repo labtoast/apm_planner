@@ -226,30 +226,30 @@ MainWindow::MainWindow(QWidget *parent):
 
     connect(ui.actionTerminalConsole, SIGNAL(triggered()), this, SLOT(showTerminalConsole()));
 
-#ifndef QGC_TOOLBAR_ENABLED
-    // Add the APM 'toolbar'
-
-    m_apmToolBar = new APMToolBar();
-    m_apmToolBar->setFlightViewAction(ui.actionFlightView);
-    m_apmToolBar->setFlightPlanViewAction(ui.actionMissionView);
-    m_apmToolBar->setInitialSetupViewAction(ui.actionHardwareConfig);
-    m_apmToolBar->setConfigTuningViewAction(ui.actionSoftwareConfig);
-    m_apmToolBar->setPlotViewAction(ui.actionEngineersView);
-    m_apmToolBar->setSimulationViewAction(ui.actionSimulation_View);
-
-    connect(ui.actionAdvanced_Mode, SIGNAL(triggered(bool)), m_apmToolBar, SLOT(checkAdvancedMode(bool)));
-
-    QDockWidget *widget = new QDockWidget(tr("APM Tool Bar"),this);
-    QWidget *toolbarcontainer = QWidget::createWindowContainer(m_apmToolBar);
-    widget->setWidget(toolbarcontainer);
-    widget->setMinimumHeight(72);
-    widget->setMaximumHeight(72);
-    widget->setMinimumWidth(1024);
-    widget->setFeatures(QDockWidget::NoDockWidgetFeatures);
-    widget->setTitleBarWidget(new QWidget(this)); // Disables the title bar
-//    /*widget*/->setStyleSheet("QDockWidget { border: 0px solid #FFFFFF; border-radius: 0px; border-bottom: 0px;}");
-    this->addDockWidget(Qt::TopDockWidgetArea, widget);
-#endif
+//#ifndef QGC_TOOLBAR_ENABLED
+//    // Add the APM 'toolbar'
+//
+//    m_apmToolBar = new APMToolBar();
+//    m_apmToolBar->setFlightViewAction(ui.actionFlightView);
+//    m_apmToolBar->setFlightPlanViewAction(ui.actionMissionView);
+//    m_apmToolBar->setInitialSetupViewAction(ui.actionHardwareConfig);
+//    m_apmToolBar->setConfigTuningViewAction(ui.actionSoftwareConfig);
+//    m_apmToolBar->setPlotViewAction(ui.actionEngineersView);
+//    m_apmToolBar->setSimulationViewAction(ui.actionSimulation_View);
+//
+//    connect(ui.actionAdvanced_Mode, SIGNAL(triggered(bool)), m_apmToolBar, SLOT(checkAdvancedMode(bool)));
+//
+//    QDockWidget *widget = new QDockWidget(tr("APM Tool Bar"),this);
+//    QWidget *toolbarcontainer = QWidget::createWindowContainer(m_apmToolBar);
+//    widget->setWidget(toolbarcontainer);
+//    widget->setMinimumHeight(72);
+//    widget->setMaximumHeight(72);
+//    widget->setMinimumWidth(1024);
+//    widget->setFeatures(QDockWidget::NoDockWidgetFeatures);
+//    widget->setTitleBarWidget(new QWidget(this)); // Disables the title bar
+////    /*widget*/->setStyleSheet("QDockWidget { border: 0px solid #FFFFFF; border-radius: 0px; border-bottom: 0px;}");
+//    this->addDockWidget(Qt::TopDockWidgetArea, widget);
+//#endif
 
     // Connect user interface devices
     emit initStatusChanged("Initializing joystick interface.");
