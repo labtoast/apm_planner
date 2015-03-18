@@ -106,7 +106,7 @@ WaypointList::WaypointList(QWidget *parent, UASWaypointManager* wpm) :
         {
             // Hide buttons, which don't make sense without valid UAS
             m_ui->positionAddButton->setEnabled(false);
-            m_ui->transmitButton->setEnabled(false);
+            m_ui->transmitButton->setEnabled(true);
 //            m_ui->readButton->setEnabled(false);
 //            m_ui->refreshButton->setEnabled(false);
 //            //FIXME: The whole "Onboard Waypoints"-tab should be hidden, instead of "refresh" button
