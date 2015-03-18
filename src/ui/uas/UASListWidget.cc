@@ -113,10 +113,11 @@ void UASListWidget::addUAS(UASInterface* uas)
     {
         uasViews.insert(uas, new UASView(uas, this));
 
-	// always display gcs at top of uas list
+	// always display gcs at top of uas list and set focus
 	if (uas->getUASID() == 255)
 	{
 	    listLayout->insertWidget(0, uasViews.value(uas));
+	    uas->setSelected();
 	}
 	else
 	{
