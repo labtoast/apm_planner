@@ -405,7 +405,7 @@
      </property>
     </widget>
    </item>
-   <item>
+   <!-- item>
     <widget class="QDoubleSpinBox" name="acceptanceSpinBox">
      <property name="sizePolicy">
       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -442,8 +442,8 @@ where to accept this waypoint as reached</string>
       <double>0.200000000000000</double>
      </property>
     </widget>
-   </item>
-   <item>
+   </item -->
+   <!-- item>
     <widget class="QDoubleSpinBox" name="holdTimeSpinBox">
      <property name="sizePolicy">
       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -479,7 +479,7 @@ where to accept this waypoint as reached</string>
       <double>9999.989999999999782</double>
      </property>
     </widget>
-   </item>
+   </item -->
    <item>
     <spacer name="horizontalSpacer">
      <property name="orientation">
