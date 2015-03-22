@@ -221,7 +221,7 @@ void QGCMapWidget::showEvent(QShowEvent* event)
     {
         connect(UASManager::instance(), SIGNAL(UASCreated(UASInterface*)), this, SLOT(addUAS(UASInterface*)), Qt::UniqueConnection);
         connect(UASManager::instance(), SIGNAL(activeUASSet(UASInterface*)), this, SLOT(activeUASSet(UASInterface*)), Qt::UniqueConnection);
-        connect(UASManager::instance(), SIGNAL(homePositionChanged(double,double,double)), this, SLOT(updateHomePosition(double,double,double)));
+//        connect(UASManager::instance(), SIGNAL(homePositionChanged(double,double,double)), this, SLOT(updateHomePosition(double,double,double)));
         connect(UASManager::instance(),SIGNAL(UASDeleted(UASInterface*)),this,SLOT(deleteUas(UASInterface*)));
 
         foreach (UASInterface* uas, UASManager::instance()->getUASList())
@@ -233,16 +233,16 @@ void QGCMapWidget::showEvent(QShowEvent* event)
         SetMouseWheelZoomType(internals::MouseWheelZoomType::MousePositionWithoutCenter);	    // set how the mouse wheel zoom functions
         SetFollowMouse(true);				    // we want a contiuous mouse position reading
 
-        SetShowHome(true);					    // display the HOME position on the map
-        Home->SetSafeArea(0);                         // set radius (meters)
-        Home->SetShowSafeArea(false);                                         // show the safe area
-        Home->SetCoord(pos_lat_lon);             // set the HOME position
+//        SetShowHome();					    // display the HOME position on the map
+//        Home->SetSafeArea(0);                         // set radius (meters)
+//        Home->SetShowSafeArea(false);                                         // show the safe area
+//        Home->SetCoord(pos_lat_lon);             // set the HOME position
 
         setFrameStyle(QFrame::NoFrame);      // no border frame
         setBackgroundBrush(QBrush(Qt::black)); // tile background
 
-        // Set current home position
-        updateHomePosition(UASManager::instance()->getHomeLatitude(), UASManager::instance()->getHomeLongitude(), UASManager::instance()->getHomeAltitude());
+//        // Set current home position
+//        updateHomePosition(UASManager::instance()->getHomeLatitude(), UASManager::instance()->getHomeLongitude(), UASManager::instance()->getHomeAltitude());
 
         // Set currently selected system
         activeUASSet(UASManager::instance()->getActiveUAS());
@@ -639,15 +639,15 @@ void QGCMapWidget::showGoToDialog()
 
 void QGCMapWidget::updateHomePosition(double latitude, double longitude, double altitude)
 {
-    Home->SetCoord(internals::PointLatLng(latitude, longitude));
-    Home->SetAltitude(altitude);
-    homeAltitude = altitude;
-    SetShowHome(true);                      // display the HOME position on the map
+//    Home->SetCoord(internals::PointLatLng(latitude, longitude));
+//    Home->SetAltitude(altitude);
+//    homeAltitude = altitude;
+//    SetShowHome(true);                      // display the HOME position on the map
 }
 
 void QGCMapWidget::goHome()
 {
-    SetCurrentPosition(Home->Coord());
+//    SetCurrentPosition(Home->Coord());
     SetZoom(18); //zoom to "large RC park" size
 }
 
