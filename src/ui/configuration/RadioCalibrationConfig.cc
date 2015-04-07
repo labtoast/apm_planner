@@ -144,7 +144,7 @@ void RadioCalibrationConfig::activeUASSet(UASInterface *uas)
     }
     connect(m_uas,SIGNAL(remoteControlChannelRawChanged(int,float)),this,SLOT(remoteControlChannelRawChanged(int,float)));
 
-    if (m_uas->isFixedWing()){
+    if (m_uas->isFixedWing() || m_uas->isGroundRover()){
         ui.revLeftVCheckBox->show();
         ui.revRollCheckBox->show();
         ui.revRightVCheckBox->show();
@@ -341,8 +341,12 @@ void RadioCalibrationConfig::calibrateButtonClicked()
 
     if (!m_calibrationEnabled)
     {
+        if (QMessageBox::question(this,"Warning!","You are about to start radio calibration.\nPlease ensure all motor power is disconnected AND all props are removed from the vehicle.\nAlso ensure transmitter and reciever are powered and connected\n\nClick OK to confirm, or cancel to abort radio calibration",QMessageBox::Ok,QMessageBox::Cancel) != QMessageBox::Ok)
+        {
+            QMessageBox::information(this,"Warning!","Radio calibration aborted");
+            return;
+        }
         ui.calibrateButton->setText("End Calibration");
-        QMessageBox::information(this,"Warning!","You are about to start radio calibration.\nPlease ensure all motor power is disconnected AND all props are removed from the vehicle.\nAlso ensure transmitter and reciever are powered and connected\n\nClick OK to confirm");
         m_calibrationEnabled = true;
         for (int i=0;i<RC_CHANNEL_NUM_MAX;i++)
         {
