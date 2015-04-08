@@ -775,6 +775,12 @@ void QGCMapWidget::updateWaypoint(int uas, Waypoint* wp)
                 Waypoint2DIcon* icon = new Waypoint2DIcon(map, this, wp, wpColor, wpindex);
                 ConnectWP(icon);
                 icon->setParentItem(map);
+
+                // don't show home waypoint
+                if (wp->getId() == 0) {
+                  icon->hide();
+                }
+
                 // Update maps to allow inverse data association
                 waypointsToIcons.insert(wp, icon);
                 iconsToWaypoints.insert(icon, wp);

@@ -604,6 +604,11 @@ void WaypointList::waypointEditableListChanged()
             connect(wpview, SIGNAL(removeWaypoint(Waypoint*)),      this, SLOT(removeWaypoint(Waypoint*)));
             //connect(wpview, SIGNAL(currentWaypointChanged(quint16)), this, SLOT(currentWaypointChanged(quint16)));
             connect(wpview, SIGNAL(changeCurrentWaypoint(quint16)), this, SLOT(currentWaypointEditableChanged(quint16)));
+
+            // don't show home waypoint
+            if (wp->getId() == 0) {
+              wpview->hide();
+            }
             editableListLayout->insertWidget(i, wpview);
         }
         WaypointEditableView *wpv = wpEditableViews.value(wp);
