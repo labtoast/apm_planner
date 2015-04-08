@@ -483,6 +483,22 @@ void UASView::updateBattery(UASInterface* uas, double voltage, double current, d
     {
         timeRemaining = seconds;
         chargeLevel = percent;
+
+        QString color;
+        if (chargeLevel > 40.0) {
+          color = "green";
+        }
+        else if (chargeLevel > 20.0) {
+          color = "orange";
+        }
+        else {
+          color = "red";
+        }
+        QString style = QString().sprintf(
+            "QProgressBar::chunk#batteryBar {"
+            "background-color: %s;"
+            "}", color.toStdString().c_str());
+        m_ui->batteryBar->setStyleSheet(style);
     }
 }
 
