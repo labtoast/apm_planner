@@ -42,7 +42,7 @@
      </property>
      <widget class="QWidget" name="editTab">
       <attribute name="title">
-       <string>Edit Waypoints</string>
+       <string>Mission Plan</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
        <property name="leftMargin">
@@ -102,13 +102,13 @@
            <item>
             <widget class="QWidget" name="editableListWidget" native="true">
              <property name="toolTip">
-              <string>Waypoint list. The list is empty until you issue a read command or add waypoints.</string>
+              <string>Mission plan. The list is empty until you issue a read command or add waypoints.</string>
              </property>
              <property name="statusTip">
-              <string>Waypoint list. The list is empty until you issue a read command or add waypoints.</string>
+              <string>Mission plan. The list is empty until you issue a read command or add waypoints.</string>
              </property>
              <property name="whatsThis">
-              <string>Waypoint list. The list is empty until you issue a read command or add waypoints.</string>
+              <string>Mission plan. The list is empty until you issue a read command or add waypoints.</string>
              </property>
             </widget>
            </item>
@@ -125,16 +125,16 @@
           </size>
          </property>
          <property name="toolTip">
-          <string>Save waypoints to a file on the local harddisk. Does not save them on the MAV.</string>
+          <string>Save mission to a file on the local harddisk.</string>
          </property>
          <property name="statusTip">
-          <string>Save waypoints to a file on the local harddisk. Does not save them on the MAV.</string>
+          <string>Save mission to a file on the local harddisk.</string>
          </property>
          <property name="whatsThis">
-          <string>Save waypoints to a file on the local harddisk. Does not save them on the MAV.</string>
+          <string>Save mission to a file on the local harddisk.</string>
          </property>
          <property name="text">
-          <string>Save WPs</string>
+          <string>Save Mission</string>
          </property>
         </widget>
        </item>
@@ -240,16 +240,16 @@
           </size>
          </property>
          <property name="toolTip">
-          <string>Load waypoints from a file on the local harddisk. Does not load the waypoints on the MAV.</string>
+          <string>Load mission from a file on the local harddisk.</string>
          </property>
          <property name="statusTip">
-          <string>Load waypoints from a file on the local harddisk. Does not load the waypoints on the MAV.</string>
+          <string>Load mission from a file on the local harddisk.</string>
          </property>
          <property name="whatsThis">
-          <string>Load waypoints from a file on the local harddisk. Does not load the waypoints on the MAV.</string>
+          <string>Load mission from a file on the local harddisk.</string>
          </property>
          <property name="text">
-          <string>Load WPs</string>
+          <string>Load Mission</string>
          </property>
         </widget>
        </item>
