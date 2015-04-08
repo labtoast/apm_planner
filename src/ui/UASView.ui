@@ -209,7 +209,7 @@ QProgressBar::chunk#speedBar {
 }
 
 QProgressBar::chunk#thrustBar {
-	background-color: orange;
+	background-color: green;
 }
 
 QToolTip {
@@ -426,23 +426,23 @@ QMenu::separator {
        </widget>
       </item>
       <item row="3" column="6" rowspan="2" colspan="2">
-       <widget class="QProgressBar" name="thrustBar">
+       <widget class="QProgressBar" name="batteryBar">
         <property name="font">
          <font>
           <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="toolTip">
-         <string>Current throttle</string>
+         <string>Battery Fuel</string>
         </property>
         <property name="statusTip">
-         <string>Current throttle</string>
+         <string>Battery Fuel</string>
         </property>
         <property name="value">
          <number>0</number>
         </property>
         <property name="format">
-         <string>throttle %p%</string>
+         <string>battery %p%</string>
         </property>
        </widget>
       </item>
@@ -526,7 +526,7 @@ QMenu::separator {
        </widget>
       </item>
       <item row="5" column="1" rowspan="3">
-       <widget class="QProgressBar" name="batteryBar">
+       <widget class="QProgressBar" name="thrustBar">
         <property name="minimumSize">
          <size>
           <width>18</width>
@@ -545,10 +545,10 @@ QMenu::separator {
          </font>
         </property>
         <property name="toolTip">
-         <string>Battery Fuel</string>
+         <string>Current Throttle</string>
         </property>
         <property name="statusTip">
-         <string>Battery Fuel</string>
+         <string>Current Throttle</string>
         </property>
         <property name="value">
          <number>0</number>
