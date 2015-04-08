@@ -324,6 +324,14 @@ void UASView::setSystemType(UASInterface* uas, unsigned int systemType)
 {
     if (uas == this->uas)
     {
+        // hide all buttons
+        m_ui->continueButton->hide();
+        m_ui->liftoffButton->hide();
+        m_ui->haltButton->hide();
+        m_ui->landButton->hide();
+        m_ui->shutdownButton->hide();
+        m_ui->abortButton->hide();
+
         // Set matching icon
         switch (systemType)
         {
