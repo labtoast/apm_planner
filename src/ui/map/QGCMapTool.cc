@@ -19,6 +19,8 @@ QGCMapTool::QGCMapTool(QWidget *parent) :
 
     // Connect map and toolbar
     ui->toolBar->setMap(ui->map);
+    ui->toolBar->hide();
+
     // Connect zoom slider and map
     ui->zoomSlider->setMinimum(ui->map->MinZoom() * MapToolZoomFactor);
     ui->zoomSlider->setMaximum(ui->map->MaxZoom() * MapToolZoomFactor);
