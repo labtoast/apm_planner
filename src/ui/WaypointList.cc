@@ -145,6 +145,14 @@ WaypointList::WaypointList(QWidget *parent, UASWaypointManager* wpm) :
     centerMapCoordinate.setX(0.0);
     centerMapCoordinate.setY(0.0);
 
+    // hide unused options
+    m_ui->wpRadiusLabel->hide();
+    m_ui->wpRadiusSpinBox->hide();
+    m_ui->altLabel->hide();
+    m_ui->altSpinBox->hide();
+    m_ui->positionAddButton->hide();
+    m_ui->addButton->hide();
+    m_ui->clearWPListButton->hide();
 }
 
 WaypointList::~WaypointList()
