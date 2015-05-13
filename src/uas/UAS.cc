@@ -477,7 +477,7 @@ void UAS::receiveMessage(LinkInterface* link, mavlink_message_t message)
                 stateHasChanged = true;
                 this->status = static_cast<uint8_t>(state.system_status);
                 getStatusForCode((int)state.system_status, uasState, stateDescription);
-                emit statusChanged(this, uasState, stateDescription);
+//                emit statusChanged(this, uasState, stateDescription);
                 emit statusChanged(this->status);
                 shortStateText = uasState;
             }
@@ -1077,6 +1077,11 @@ void UAS::receiveMessage(LinkInterface* link, mavlink_message_t message)
                 text.remove("#audio:");
                 emit textMessageReceived(uasId, message.compid, severity, QString("Audio message: ") + text);
                 GAudioOutput::instance()->say(text, severity);
+            }
+            else if (text.startsWith("#statetext:"))
+            {
+                text.remove("#statetext:");
+                emit statusChanged(this, text, "");
             }
             else
             {
