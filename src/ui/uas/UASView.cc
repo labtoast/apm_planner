@@ -629,7 +629,7 @@ void UASView::refresh()
         if (!globalFrameKnown && localFrame)
         {
             QString position;
-            position = position.sprintf("%05.1f %05.1f %06.1f m", x, y, z);
+            position = position.sprintf("%05.5f %05.5f % 6.1f m", x, y, z);
             m_ui->positionLabel->setText(position);
         }
 
@@ -655,7 +655,7 @@ void UASView::refresh()
                 lonIndicator = "W";
             }
 
-            globalPosition = globalPosition.sprintf("%05.1f%s %05.1f%s %06.1f m", lon, lonIndicator.toStdString().c_str(), lat, latIndicator.toStdString().c_str(), alt);
+            globalPosition = globalPosition.sprintf("%05.5f%s %05.5f%s % 6.1f m", lon, lonIndicator.toStdString().c_str(), lat, latIndicator.toStdString().c_str(), alt);
             m_ui->positionLabel->setText(globalPosition);
         }
 
