@@ -100,6 +100,7 @@ WindowsBuild {
         $$(QTDIR)\\bin\\Qt5Script$${DLL_QT_DEBUGCHAR}.dll \
         $$(QTDIR)\\bin\\Qt5Svg$${DLL_QT_DEBUGCHAR}.dll \
         $$(QTDIR)\\bin\\Qt5Test$${DLL_QT_DEBUGCHAR}.dll \
+        $$(QTDIR)\\bin\\Qt5WebChannel$${DLL_QT_DEBUGCHAR}.dll \
         $$(QTDIR)\\bin\\Qt5SerialPort$${DLL_QT_DEBUGCHAR}.dll
 
     for(COPY_FILE, COPY_FILE_LIST) {
