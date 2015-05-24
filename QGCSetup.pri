@@ -71,16 +71,16 @@ WindowsBuild {
 	DebugBuild: DLL_QT_DEBUGCHAR = "d"
     ReleaseBuild: DLL_QT_DEBUGCHAR = ""
     COPY_FILE_LIST = \
-        $$BASEDIR_WIN\\libs\\lib\\sdl\\win32\\SDL.dll \
+        $$BASEDIR_WIN\\libs\\lib\\sdl\\win32\\SDL2.dll \
         $$BASEDIR_WIN\\libs\\thirdParty\\libxbee\\lib\\libxbee.dll \
         $$(QTDIR)\\bin\\Qt5WebKitWidgets$${DLL_QT_DEBUGCHAR}.dll \
         $$(QTDIR)\\bin\\Qt5MultimediaWidgets$${DLL_QT_DEBUGCHAR}.dll \
         $$(QTDIR)\\bin\\Qt5Multimedia$${DLL_QT_DEBUGCHAR}.dll \
         $$(QTDIR)\\bin\\Qt5Gui$${DLL_QT_DEBUGCHAR}.dll \
         $$(QTDIR)\\bin\\Qt5Core$${DLL_QT_DEBUGCHAR}.dll \
-        $$(QTDIR)\\bin\\icuin51.dll \
-        $$(QTDIR)\\bin\\icuuc51.dll \
-        $$(QTDIR)\\bin\\icudt51.dll \
+        $$(QTDIR)\\bin\\icuin53.dll \
+        $$(QTDIR)\\bin\\icuuc53.dll \
+        $$(QTDIR)\\bin\\icudt53.dll \
         $$(QTDIR)\\bin\\Qt5Network$${DLL_QT_DEBUGCHAR}.dll \
         $$(QTDIR)\\bin\\Qt5Widgets$${DLL_QT_DEBUGCHAR}.dll \
         $$(QTDIR)\\bin\\Qt5OpenGL$${DLL_QT_DEBUGCHAR}.dll \
