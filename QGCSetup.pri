@@ -28,24 +28,27 @@ COPY_RESOURCE_LIST = \
     $$BASEDIR/qml \
     $$BASEDIR/data \
     $$BASEDIR/sik_uploader
-    
+
 WindowsBuild {
-	DESTDIR_COPY_RESOURCE_LIST = $$replace(DESTDIR,"/","\\")
+    DESTDIR_COPY_RESOURCE_LIST = $$replace(DESTDIR,"/","\\")
     COPY_RESOURCE_LIST = $$replace(COPY_RESOURCE_LIST, "/","\\")
     CONCATCMD = $$escape_expand(\\n)
+    for(COPY_DIR, COPY_RESOURCE_LIST):QMAKE_POST_LINK += $$CONCATCMD $$QMAKE_COPY_DIR $${COPY_DIR} $$DESTDIR_COPY_RESOURCE_LIST"\\"$$basename(COPY_DIR)
 }
 
 LinuxBuild {
     DESTDIR_COPY_RESOURCE_LIST = $$DESTDIR
     CONCATCMD = &&
+    for(COPY_DIR, COPY_RESOURCE_LIST):QMAKE_POST_LINK += $$CONCATCMD $$QMAKE_COPY_DIR $${COPY_DIR} $$DESTDIR_COPY_RESOURCE_LIST
+
 }
 
 MacBuild {
     DESTDIR_COPY_RESOURCE_LIST = $$DESTDIR/$${TARGET}.app/Contents/MacOS
     CONCATCMD = &&
+    for(COPY_DIR, COPY_RESOURCE_LIST):QMAKE_POST_LINK += $$CONCATCMD $$QMAKE_COPY_DIR $${COPY_DIR} $$DESTDIR_COPY_RESOURCE_LIST
+
 }
-    
-for(COPY_DIR, COPY_RESOURCE_LIST):QMAKE_POST_LINK += $$CONCATCMD $$QMAKE_COPY_DIR $${COPY_DIR} $$DESTDIR_COPY_RESOURCE_LIST
 
 #
 # Perform platform specific setup
@@ -104,15 +107,15 @@ WindowsBuild {
     }
 
 	ReleaseBuild {
-		QMAKE_POST_LINK += $$escape_expand(\\n) $$quote(del /F "$$DESTDIR_WIN\\$${TARGET}.exp")
-
 		# Copy Visual Studio DLLs
-		# Note that this is only done for release because the debugging versions of these DLLs cannot be redistributed.
-		# I'm not certain of the path for VS2008, so this only works for VS2010.
 		win32-msvc2010 {
 			QMAKE_POST_LINK += $$escape_expand(\\n) $$quote(xcopy /D /Y "\"C:\\Program Files \(x86\)\\Microsoft Visual Studio 10.0\\VC\\redist\\x86\\Microsoft.VC100.CRT\\*.dll\""  "$$DESTDIR_WIN\\")
-		}
-	}
+                        QMAKE_POST_LINK += $$escape_expand(\\n) $$quote(del /F "$$DESTDIR_WIN\\$${TARGET}.exp")
+                }
+                win32-msvc2013 {
+                        QMAKE_POST_LINK += $$escape_expand(\\n) $$quote(xcopy /D /Y "\"C:\\Program Files \(x86\)\\Microsoft Visual Studio 12.0\\VC\\redist\\x86\\Microsoft.VC120.CRT\\*.dll\""  "$$DESTDIR_WIN\\")
+                }
+        }
 }
 
 LinuxBuild {
