@@ -74,16 +74,12 @@ void TCPLink::setHostAddress(QHostAddress hostAddress)
 	}
 
 	_hostAddress = hostAddress;
+    emit linkChanged(this);
     _resetName();
 
 	if (reconnect) {
 		connect();
 	}
-}
-
-void TCPLink::setHostAddress(const QString& hostAddress)
-{
-    setHostAddress(QHostAddress(hostAddress));
 }
 
 void TCPLink::setPort(int port)
@@ -96,6 +92,7 @@ void TCPLink::setPort(int port)
 	}
 
 	_port = port;
+    emit linkChanged(this);
     _resetName();
 
 	if (reconnect) {
@@ -116,6 +113,7 @@ void TCPLink::setAsServer(bool asServer)
     }
 
     _asServer = asServer;
+    emit linkChanged(this);
     _resetName();
 
     if (reconnect) {
@@ -352,6 +350,16 @@ int TCPLink::getId() const
 QString TCPLink::getName() const
 {
     return _name;
+}
+
+QString TCPLink::getShortName() const
+{
+    return _hostAddress.toString();
+}
+
+QString TCPLink::getDetail() const
+{
+    return QString::number(_port);
 }
 
 qint64 TCPLink::getConnectionSpeed() const
