@@ -65,6 +65,8 @@ public:
     // LinkInterface methods
     virtual int     getId(void) const;
     virtual QString getName(void) const;
+    virtual QString getShortName(void) const;
+    virtual QString getDetail(void) const;
     virtual bool    isConnected(void) const;
     virtual bool    connect(void);
     virtual bool    disconnect(void);
@@ -78,7 +80,6 @@ public:
     LinkType getLinkType() { return TCP_LINK; }
 
 public slots:
-    void setHostAddress(const QString& hostAddress);
     void setPort(int port);
     void setAsServer(bool asServer);
 

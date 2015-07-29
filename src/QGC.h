@@ -35,7 +35,9 @@
 #define define2string(x) define2string_p(x)
 
 /* Windows fixes */
-#ifdef _MSC_VER
+#if defined(_MSC_VER) && _MSC_VER>=1800
+   #include <limits>
+#elif defined(_MSC_VER)
 /* Needed define for Eigen */
 //#define NOMINMAX
 #include <limits>
