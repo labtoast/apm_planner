@@ -325,10 +325,7 @@ void UASView::setSystemType(UASInterface* uas, unsigned int systemType)
     if (uas == this->uas)
     {
         // hide all buttons
-        m_ui->continueButton->hide();
-        m_ui->liftoffButton->hide();
         m_ui->haltButton->hide();
-        m_ui->landButton->hide();
         m_ui->shutdownButton->hide();
         m_ui->abortButton->hide();
 
@@ -359,6 +356,7 @@ void UASView::setSystemType(UASInterface* uas, unsigned int systemType)
                 m_ui->nameLabel->setText(tr("GCS ") + result.sprintf("%03d", uas->getUASID()));
                 m_ui->waypointLabel->setText("");
                 m_ui->timeRemainingLabel->setText("Online:");
+                m_ui->continueButton->hide();
                 m_ui->batteryBar->hide();
                 m_ui->thrustBar->hide();
                 m_ui->stateLabel->hide();
