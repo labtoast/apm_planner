@@ -29,27 +29,49 @@ message(Qt version $$[QT_VERSION])
 # to allow us to easily modify suported build types in one place instead of duplicated throughout
 # the project file.
 
+DEFINES+=DISABLE_3DMOUSE    # Disable 3D mice support for now
+#DEFINES+=ENABLE_CAMRAVIEW   # Example to include camraview
+
 linux-g++-64 {
     message(Linux build x64_86)
     CONFIG += LinuxBuild
     DEFINES += Q_LINUX_64
+    DEFINES += FLITE_AUDIO_ENABLED
+
     DISTRO = $$system(lsb_release -i)
+
     contains( DISTRO, "Ubuntu" ) {
-         DEFINES += Q_UBUNTU
+        message(Ubuntu Build)
+        DEFINES += Q_UBUNTU
     }
+
+    contains( DISTRO, "Arch" ) {
+        message(ArchLinux Build)
+        DEFINES += Q_ARCHLINUX
+    }
+
 } else: linux-g++ {
     message(Linux build x86)
     CONFIG += LinuxBuild
     DEFINES += Q_LINUX_32
+    DEFINES += FLITE_AUDIO_ENABLED
+
     DISTRO = $$system(lsb_release -i)
+
     contains( DISTRO, "Ubuntu" ) {
-         DEFINES += Q_UBUNTU
+        message(ArchLinux Build)
+        DEFINES += Q_UBUNTU
     }
 
-} else : win32-msvc2008 | win32-msvc2010 | win32-msvc2012 {
+    contains( DISTRO, "Arch" ) {
+        message(ArchLinux Build)
+        DEFINES += Q_ARCHLINUX
+    }
+
+} else : win32-msvc2012 | win32-msvc2013 {
     message(Windows build)
     CONFIG += WindowsBuild
-}  else : win32-x-g++|win64-x-g++ {
+}  else : win32-g++|win64-g++ {
     message(Windows Cross Build)
     CONFIG += WindowsCrossBuild
 } else : macx-clang | macx-g++ {
@@ -101,23 +123,24 @@ QT += network \
     opengl \
     svg \
     xml \
-    webkit \
     sql \
     widgets \
     serialport \
-    webkitwidgets \
     script\
     quick \
-    printsupport
+    printsupport \
+    qml \
+    quickwidgets
 
 ##  testlib is needed even in release flavor for QSignalSpy support
 QT += testlib
 
-!NOTOUCH {
-    gittouch.commands = touch qgroundcontrol.pro
-    QMAKE_EXTRA_TARGETS += gittouch
-    POST_TARGETDEPS += gittouch
-}
+#Not sure what we were doing here, will have to ask
+#!NOTOUCH {
+#    gittouch.commands = touch qgroundcontrol.pro
+#    QMAKE_EXTRA_TARGETS += gittouch
+#    POST_TARGETDEPS += gittouch
+#}
 
 # Turn off serial port warnings
 DEFINES += _TTY_NOWARN_
@@ -143,7 +166,8 @@ MacBuild {
     QMAKE_INFO_PLIST = Custom-Info.plist
     CONFIG += x86_64
     CONFIG -= x86
-    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
+    QMAKE_MAC_SDK = macosx10.11 # Required for Xcode7.0
+    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
     ICON = $$BASEDIR/files/APMIcons/icon.icns
     QMAKE_INFO_PLIST = APMPlanner.plist   # Sets the pretty name for the build
 
@@ -164,6 +188,7 @@ LinuxBuild {
     LIBS += -lsndfile -lasound
     LIBS += -lz
     LIBS += -lssl -lcrypto
+    DEFINES += OPENSSL
 }
 
 WindowsBuild {
@@ -179,8 +204,8 @@ WindowsBuild {
 
     RC_FILE = $$BASEDIR/qgroundcontrol.rc
 
-    DEFINES += GIT_COMMIT=$$system(\"c:/program files (x86)/git/bin/git.exe\" describe --dirty=-DEV --always)
-    DEFINES += GIT_HASH=$$system(\"c:/program files (x86)/git/bin/git.exe\" log -n 1 --pretty=format:%H)
+    DEFINES += GIT_COMMIT=$$system(git describe --dirty=-DEV --always)
+    DEFINES += GIT_HASH=$$system(git log -n 1 --pretty=format:%H)
 }
 
 WindowsCrossBuild {
@@ -359,6 +384,7 @@ FORMS += \
     src/ui/mission/QGCMissionNavLoiterUnlim.ui \
     src/ui/mission/QGCMissionNavLoiterTurns.ui \
     src/ui/mission/QGCMissionNavLoiterTime.ui \
+    src/ui/mission/QGCMissionNavLoiterToAlt.ui \
     src/ui/mission/QGCMissionNavReturnToLaunch.ui \
     src/ui/mission/QGCMissionNavLand.ui \
     src/ui/mission/QGCMissionNavTakeoff.ui \
@@ -423,8 +449,6 @@ FORMS += \
     src/uas/LogDownloadDialog.ui \
     src/ui/configuration/CompassMotorCalibrationDialog.ui \
     src/ui/MissionElevationDisplay.ui \
-    src/ui/DroneshareUploadDialog.ui \
-    src/ui/DroneshareDialog.ui \
     src/ui/uas/PreFlightCalibrationDialog.ui \
     src/ui/configuration/RadioFlashWizard.ui
 
@@ -451,9 +475,6 @@ HEADERS += \
     src/ui/HUD.h \
     src/configuration.h \
     src/ui/uas/UASView.h \
-#ifdef CAMERAVIEW
-    src/ui/CameraView.h \
-#endif
     src/comm/MAVLinkSimulationLink.h \
     src/comm/UDPLink.h \
     src/comm/UDPClientLink.h \
@@ -486,7 +507,6 @@ HEADERS += \
     src/ui/QGCPxImuFirmwareUpdate.h \
     src/ui/RadioCalibration/RadioCalibrationData.h \
     src/comm/QGCMAVLink.h \
-    src/ui/map3D/QGCWebPage.h \
     src/ui/SlugsDataSensorView.h \
     src/ui/SlugsHilSim.h \
     src/ui/SlugsPadCameraControl.h \
@@ -543,6 +563,7 @@ HEADERS += \
     src/ui/mission/QGCMissionNavLoiterUnlim.h \
     src/ui/mission/QGCMissionNavLoiterTurns.h \
     src/ui/mission/QGCMissionNavLoiterTime.h \
+    src/ui/mission/QGCMissionNavLoiterToAlt.h \
     src/ui/mission/QGCMissionNavReturnToLaunch.h \
     src/ui/mission/QGCMissionNavLand.h \
     src/ui/mission/QGCMissionNavTakeoff.h \
@@ -641,11 +662,6 @@ HEADERS += \
     src/comm/MAVLinkProtocol.h \
     src/ui/MissionElevationDisplay.h \
     src/ui/GoogleElevationData.h \
-    src/ui/DroneshareUploadDialog.h \
-    src/ui/DroneshareUpload.h \
-    src/ui/DroneshareDialog.h \
-    src/ui/LoginDialog.h \
-    src/ui/DroneshareAPIBroker.h \
     src/comm/UASObject.h \
     src/comm/VehicleOverview.h \
     src/comm/RelPositionOverview.h \
@@ -655,7 +671,10 @@ HEADERS += \
     src/ui/uas/PreFlightCalibrationDialog.h \
     src/ui/configuration/RadioFlashWizard.h \
     src/ui/GraphTreeWidgetItem.h \
-    src/comm/LinkManagerFactory.h
+    src/comm/LinkManagerFactory.h \
+    src/ui/VibrationMonitor.h \
+    src/ui/EKFMonitor.h \
+    src/Settings.h
 
 SOURCES += src/main.cc \
     src/QGCCore.cc \
@@ -675,9 +694,6 @@ SOURCES += src/main.cc \
     src/ui/uas/UASInfoWidget.cc \
     src/ui/HUD.cc \
     src/ui/uas/UASView.cc \
-#ifdef CAMERAVIEW
-    src/ui/CameraView.cc \
-#endif
     src/comm/MAVLinkSimulationLink.cc \
     src/comm/UDPLink.cc \
     src/comm/UDPClientLink.cc \
@@ -709,7 +725,6 @@ SOURCES += src/main.cc \
     src/ui/QGCFirmwareUpdate.cc \
     src/ui/QGCPxImuFirmwareUpdate.cc \
     src/ui/RadioCalibration/RadioCalibrationData.cc \
-    src/ui/map3D/QGCWebPage.cc \
     src/ui/SlugsDataSensorView.cc \
     src/ui/SlugsHilSim.cc \
     src/ui/SlugsPadCameraControl.cpp \
@@ -766,6 +781,7 @@ SOURCES += src/main.cc \
     src/ui/mission/QGCMissionNavLoiterUnlim.cc \
     src/ui/mission/QGCMissionNavLoiterTurns.cc \
     src/ui/mission/QGCMissionNavLoiterTime.cc \
+    src/ui/mission/QGCMissionNavLoiterToAlt.cc \
     src/ui/mission/QGCMissionNavReturnToLaunch.cc \
     src/ui/mission/QGCMissionNavLand.cc \
     src/ui/mission/QGCMissionNavTakeoff.cc \
@@ -863,11 +879,6 @@ SOURCES += src/main.cc \
     src/comm/MAVLinkProtocol.cc \
     src/ui/MissionElevationDisplay.cpp \
     src/ui/GoogleElevationData.cpp \
-    src/ui/DroneshareUploadDialog.cpp \
-    src/ui/DroneshareUpload.cpp \
-    src/ui/DroneshareDialog.cc \
-    src/ui/LoginDialog.cpp \
-    src/ui/DroneshareAPIBroker.cpp \
     src/comm/UASObject.cc \
     src/comm/VehicleOverview.cc \
     src/comm/RelPositionOverview.cc \
@@ -877,7 +888,28 @@ SOURCES += src/main.cc \
     src/ui/uas/PreFlightCalibrationDialog.cpp \
     src/ui/configuration/RadioFlashWizard.cpp \
     src/ui/GraphTreeWidgetItem.cc \
-    src/comm/LinkManagerFactory.cpp
+    src/comm/LinkManagerFactory.cpp \
+    src/ui/VibrationMonitor.cpp \
+    src/ui/EKFMonitor.cpp \
+    src/Settings.cpp
+
+MacBuild | WindowsBuild : contains(GOOGLEEARTH, enable) { #fix this to make sense ;)
+    message(Including support for Google Earth)
+    QT +=  webkit webkitwidgets
+    HEADERS +=  src/ui/map3D/QGCWebPage.h
+    SOURCES +=  src/ui/map3D/QGCWebPage.cc
+} else {
+    message(Skipping support for Google Earth)
+}
+
+contains(DEFINES, ENABLE_CAMRAVIEW){
+    message(Including support for Camera View)
+    HEADERS += src/ui/CameraView.h
+    SOURCES += src/ui/CameraView.cc
+} else {
+    message(Skipping support for Camera View)
+}
+
 
 OTHER_FILES += \
     qml/components/DigitalDisplay.qml \
@@ -891,7 +923,7 @@ OTHER_FILES += \
     qml/components/CompassIndicator.qml \
     qml/components/PitchIndicator.qml \
     qml/components/StatusMessageIndicator.qml \
-    qml/components/InformationOverlayIndicator.qml
+    qml/components/InformationOverlayIndicator.qml \
 
 OTHER_FILES += \
     qml/ApmToolBar.qml \
@@ -906,7 +938,11 @@ OTHER_FILES += \
     qml/resources/apmplanner/toolbar/light_tuningconfig_icon.png \
     qml/resources/apmplanner/toolbar/flightdata.png \
     qml/resources/apmplanner/toolbar/disconnect.png \
-    qml/resources/apmplanner/toolbar/donate.png \
+    qml/resources/apmplanner/toolbar/donate.png
+
+OTHER_FILES += \
+    qml/VibrationMonitor.qml \
+    qml/EKFMonitor.qml
 
 # Command Line Tools
 OTHER_FILES += \
@@ -919,5 +955,8 @@ OTHER_FILES += \
 #sources.path        += $$DESTDIR/qml
 #target.path         += apmplanner2
 #INSTALLS            += sources target
+
+DISTFILES += \
+    qml/components/BarGauge.qml
 
 

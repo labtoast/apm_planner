@@ -38,6 +38,7 @@ This file is part of the QGROUNDCONTROL project
 #include <QStackedWidget>
 #include <QSettings>
 #include <qlist.h>
+#include <QNetworkProxy>
 
 #include "ui_MainWindow.h"
 //#include "LinkManager.h"
@@ -47,7 +48,9 @@ This file is part of the QGROUNDCONTROL project
 #include "UASControlWidget.h"
 #include "UASInfoWidget.h"
 #include "WaypointList.h"
+#if (defined ENABLE_CAMRAVIW)
 #include "CameraView.h"
+#endif // ENABLE_CAMRAVIW
 #include "UASListWidget.h"
 //#include "MAVLinkProtocol.h"
 #include "MAVLinkSimulationLink.h"
@@ -65,7 +68,7 @@ This file is part of the QGROUNDCONTROL project
 #include "WatchdogControl.h"
 #include "HSIDisplay.h"
 #include "opmapcontrol.h"
-#if (defined Q_OS_MAC) | (defined _MSC_VER)
+#if (defined GOGGLEEARTH) && ((defined Q_OS_MAC) | (defined _MSC_VER))
 #include "QGCGoogleEarthView.h"
 #endif
 #include "QGCToolBar.h"
@@ -89,7 +92,6 @@ class QGCMAVLinkMessageSender;
 class QGCFirmwareUpdate;
 class QSplashScreen;
 class QGCStatusBar;
-class DroneshareDialog;
 
 /**
  * @brief Main Application Window
@@ -118,6 +120,8 @@ public:
     bool dockWidgetTitleBarsEnabled();
     /** @brief Get low power mode setting */
     bool lowPowerModeEnabled();
+    /** @brief Get Auto Prox mode setting */
+    bool autoProxyModeEnabled();
 
     QList<QAction*> listLinkMenuActions(void);
 
@@ -200,6 +204,8 @@ public slots:
     void enableAutoReconnect(bool enabled);
     /** @brief Save power by reducing update rates */
     void enableLowPowerMode(bool enabled) { lowPowerMode = enabled; }
+    /** @brief Use the system proxy for network connections automatically */
+    void enableAutoProxyMode(bool enabled);
     /** @brief Switch to native application style */
     void loadNativeStyle();
     /** @brief Switch to indoor mission style */
@@ -262,6 +268,7 @@ signals:
     /** @brief Forward X11Event to catch 3DMouse inputs */
     void x11EventOccured(XEvent *event);
 #endif //MOUSE_ENABLED_LINUX
+    void autoProxyChanged(bool);
 
 public:
     QGCMAVLinkLogPlayer* getLogPlayer()
@@ -375,7 +382,7 @@ protected:
 #ifdef QGC_OSG_ENABLED
     QPointer<QWidget> q3DWidget;
 #endif
-#if (defined _MSC_VER) || (defined Q_OS_MAC)
+#if (defined GOOGLEEARTH) && ((defined _MSC_VER) || (defined Q_OS_MAC))
     QPointer<QGCGoogleEarthView> earthWidget;
 #endif
     QPointer<QGCFirmwareUpdate> firmwareUpdateWidget;
@@ -456,6 +463,7 @@ protected:
     bool autoReconnect;
     Qt::WindowStates windowStateVal;
     bool lowPowerMode; ///< If enabled, QGC reduces the update rates of all widgets
+    bool autoProxyMode;
     QPointer<QGCFlightGearLink> fgLink;
     QTimer windowNameUpdateTimer;
 
@@ -464,7 +472,6 @@ private slots:
     void autoUpdateCancelled(QString version);
     void showNoUpdateAvailDialog();
 
-    void showDroneshareDialog();
     void showTerminalConsole();
     void closeTerminalConsole();
 
@@ -485,7 +492,6 @@ private:
     AutoUpdateCheck m_autoUpdateCheck;
     AutoUpdateDialog* m_dialog;
 
-    DroneshareDialog* m_droneshareDialog;
     QDialog* m_terminalDialog;
 
 };

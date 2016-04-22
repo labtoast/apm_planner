@@ -26,6 +26,8 @@ private slots:
     void setMissionsDir();
     void ratesChanged();
     void setBetaRelease(bool state);
+    void setHideDonateButton(bool state);
+    void setMavlinkSeverityCompatibility(bool state);
 
     void setActiveUAS(UASInterface *uas);
 
